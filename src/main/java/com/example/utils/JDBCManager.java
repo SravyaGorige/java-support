@@ -22,17 +22,17 @@ public class JDBCManager {
              PreparedStatement ps = conn.prepareStatement(query)) {
 
             ps.setString(1, user.getName());
-            ps.setString(2, String.valueOf(user.getRollNo()));
+            ps.setInt(2, user.getRollNo());
 
-            if(ps.executeUpdate(query)==1)
+            if (ps.executeUpdate() == 1) {
                 return user;
-
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return user;
+        return null;
     }
 
     // READ

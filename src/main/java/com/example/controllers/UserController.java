@@ -51,15 +51,6 @@ public class UserController {
 
     @PostMapping("/saveall")
     public List<User> saveUserall(@RequestBody List<User> allUsers) throws IOException {
-        List<Map<String, String>> currentUsers =
-                allUsers.stream()
-                        .map(user -> Map.of(
-                                "Name", user.getName(),
-                                "RollNo", String.valueOf(user.getRollNo())
-                        ))
-                        .collect(Collectors.toList());
-
-        //ExcelTableManager.writeTable("StudentData.xlsx", currentUsers);
         for (User user: allUsers){
             JDBCManager.saveUser(user);
         }
